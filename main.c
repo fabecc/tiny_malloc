@@ -18,25 +18,43 @@ int main(void)
 		return 1;
 	}
 
-	// Print stats
-	tm_stats();
+	// User loop
+	char line[1024];
+	while (1)
+	{
+		// Print stats
+		tm_stats();
 
-	// Get memory
-	int* data = (int*)tm_malloc();
-	if (data == NULL) {
-		perr("Failed to get memory");
-		return 1;
+		printf("\n");
+		printf("What do you want to do [m/f<id>/q] ?\n");
+
+		fgets(line, 1024, stdin);
+		if (line[0] == 'm')
+		{
+			// Get memory
+			int* data = (int*)tm_malloc();
+			if (data == NULL) {
+				perr("Failed to get memory");
+				return 1;
+			}
+			printf("Get memory address %p\n", (void*)data);
+			// Try to write something in memory
+			*data = 0xdeadbeaf;
+		}
+		else if (line[0] == 'f')
+		{
+			// Free memory
+//			tm_free(data);
+		}
+		else if (line[0] == 'q')
+		{
+			break ;
+		}
+		else
+		{
+			perr("Unknown action");
+		}
 	}
-	printf("Get memory address %p\n", (void*)data);
-
-	// Try to write something in memory
-	*data = 0xdeadbeaf;
-
-	// Free memory
-	tm_free(data);
-
-	// Print stats
-	tm_stats();
 
 	return 0;
 }
