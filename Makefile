@@ -1,8 +1,9 @@
 
-EXEC = main
-
+CC = gcc
 CFLAGS = -Wall -Werror -pedantic-errors
 LDFLAGS =
+
+EXEC = main
 
 SRC = \
 	main.c \
@@ -15,13 +16,13 @@ all: $(EXEC)
 	@echo "Compilation done"
 
 $(EXEC): $(OBJ)
-	@$(CC) -o $@ $^ $(LDFLAGS)
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
-	@$(CC) -o $@ -c $< $(CFLAGS)
-
-.PHONY: clean
+	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
-	@rm -rf *.o
-	@rm -rf $(EXEC)
+	rm -rf *.o
+	rm -rf $(EXEC)
+
+.PHONY: clean
