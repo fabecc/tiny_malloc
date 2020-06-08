@@ -1,4 +1,5 @@
 
+#include <stdio.h>
 #include "tm.h"
 
 #define BLOCK_SIZE   4
@@ -20,8 +21,8 @@ int main(void)
 	// Get memory
 	void* data = tm_malloc();
 	if (data == NULL)
-		perror("Failed to get memory")
-	printf("Get memory address %p", data)
+		perror("Failed to get memory");
+	printf("Get memory address %p", data);
 
 	// Free memory
 	tm_free(data);
