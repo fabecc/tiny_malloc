@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "tm.h"
 
 void perr(char* msg)
@@ -20,6 +21,7 @@ int main(void)
 
 	// User loop
 	char line[1024];
+	int count = 1;
 	while (1)
 	{
 		// Print stats
@@ -35,16 +37,18 @@ int main(void)
 			int* data = (int*)tm_malloc();
 			if (data == NULL) {
 				perr("Failed to get memory");
-				return 1;
 			}
-			printf("Get memory address %p\n", (void*)data);
-			// Try to write something in memory
-			*data = 0xdeadbeaf;
+			else
+			{
+				// Write data in memory
+				*data = count++;
+			}
 		}
 		else if (line[0] == 'f')
 		{
 			// Free memory
-//			tm_free(data);
+			int *data = (int*)strtol(line + 1, NULL, 0);
+			tm_free(data);
 		}
 		else if (line[0] == 'q')
 		{

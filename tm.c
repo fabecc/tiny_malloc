@@ -30,12 +30,23 @@ int tm_init()
 // Get Memory
 void* tm_malloc(void)
 {
-	return memory + 1;
+	int nb_block = MEM_SIZE / REAL_BLOCK_SIZE;
+	for (int i = 0; i < nb_block; ++i) {
+		if (memory[i * REAL_BLOCK_SIZE] == 0)
+		{
+			memory[i * REAL_BLOCK_SIZE] = 1;
+			return memory + i * REAL_BLOCK_SIZE + 1;
+		}
+	}
+	return NULL;
 }
 
 // Free previous given memory block
 void tm_free(void* data)
 {
+	printf("Free %p\n", data);
+	char* ptr = ((char*)data) - 1;
+	*ptr = 0;
 }
 
 // Print stat on memory usage
@@ -47,7 +58,9 @@ void tm_stats(void)
 	int nb_block = MEM_SIZE / REAL_BLOCK_SIZE;
 	for (int i = 0; i < nb_block; ++i) {
 		if (memory[i * REAL_BLOCK_SIZE] == 0x01) {
-			printf("  Block-%d is used\n", i);
+			void* addr = memory + i * REAL_BLOCK_SIZE + 1;
+			int value = *(int*)addr;
+			printf("  Block-%d is used (%p), value is 0x%x\n", i, addr, value);
 		}
 		else {
 			printf("  Block-%d is free\n", i);
