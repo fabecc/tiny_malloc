@@ -2,16 +2,12 @@
 #include <stdio.h>
 #include "tm.h"
 
-#define BLOCK_SIZE   4
-#define MEM_SIZE     10 * (BLOCK_SIZE + 1)
-char memory[MEM_SIZE];
-
 int main(void)
 {
 	int res;
 
 	// Init tiny malloc module
-	res = tm_init(memory, MEM_SIZE, BLOCK_SIZE);
+	res = tm_init();
 	if (res != 0)
 		perror("Failed to init tyny malloc");
 

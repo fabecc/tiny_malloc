@@ -1,8 +1,12 @@
 
 #include "tm.h"
 
+#define BLOCK_SIZE   4
+#define MEM_SIZE     10 * (BLOCK_SIZE + 1)
+char memory[MEM_SIZE];
+
 // Init Tiny Malloc
-int tm_init(char* mem, int mem_size, int block_size)
+int tm_init()
 {
 
 }

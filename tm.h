@@ -2,7 +2,7 @@
 # define TM_H_
 
 // Init Tiny Malloc
-int tm_init(char* mem, int mem_size, int block_size);
+int tm_init();
 
 // Get Memory
 void* tm_malloc(void);
