@@ -66,5 +66,5 @@ void tm_stats(void)
 			printf("  Block-%d is free\n", i);
 		}
 	}
-	printf("<<<<<<<<<<<<<<<<<\n");
+	printf("<<<<<<<<<<<<<<<<\n");
 }
